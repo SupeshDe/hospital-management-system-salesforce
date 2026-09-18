@@ -1,0 +1,415 @@
+<template>
+
+    <div class="prescription-portal">
+
+        <!-- =========================================
+             HEADER
+        ========================================== -->
+
+        <header class="header">
+
+            <div class="header-content">
+
+                <div class="brand">
+
+                    <div class="logo">
+                        💊
+                    </div>
+
+                    <div>
+
+                        <h1>
+                            Prescription Management
+                        </h1>
+
+                        <p>
+                            Manage your medical prescriptions securely
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="header-badge">
+                    Medical Records
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <main class="main-content">
+
+
+            <!-- =========================================
+                 WELCOME
+            ========================================== -->
+
+            <section class="welcome-section">
+
+                <div>
+
+                    <span class="welcome-label">
+                        MEDICAL CARE
+                    </span>
+
+                    <h2>
+                        Manage Your Prescriptions
+                    </h2>
+
+                    <p>
+                        Create and review prescriptions
+                        associated with your appointments.
+                    </p>
+
+                </div>
+
+                <div class="welcome-icon">
+                    🩺
+                </div>
+
+            </section>
+
+
+            <!-- =========================================
+                 CREATE PRESCRIPTION
+            ========================================== -->
+
+            <section class="section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            NEW PRESCRIPTION
+                        </span>
+
+                        <h2>
+                            Create Prescription
+                        </h2>
+
+                        <p>
+                            Select an appointment and enter
+                            the prescribed medical information.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="prescription-form">
+
+
+                    <!-- Appointment -->
+
+                    <div class="form-field full-width">
+
+                        <lightning-combobox
+                            name="appointment"
+                            label="Select Appointment"
+                            placeholder="Choose an appointment"
+                            value={selectedAppointment}
+                            options={appointmentOptions}
+                            onchange={handleAppointmentChange}
+                            required>
+                        </lightning-combobox>
+
+                    </div>
+
+
+                    <!-- Medicines -->
+
+                    <div class="form-field full-width">
+
+                        <lightning-textarea
+                            name="medicines"
+                            label="Medicines"
+                            placeholder="Example: Paracetamol 500mg, Azithromycin 250mg..."
+                            value={medicines}
+                            onchange={handleMedicinesChange}
+                            required>
+                        </lightning-textarea>
+
+                    </div>
+
+
+                    <!-- Dosage -->
+
+                    <div class="form-field full-width">
+
+                        <lightning-textarea
+                            name="dosage"
+                            label="Dosage Instructions"
+                            placeholder="Example: Take 1 tablet twice daily after meals..."
+                            value={dosageInstructions}
+                            onchange={handleDosageChange}
+                            required>
+                        </lightning-textarea>
+
+                    </div>
+
+
+                    <!-- Doctor Notes -->
+
+                    <div class="form-field full-width">
+
+                        <lightning-textarea
+                            name="notes"
+                            label="Doctor Notes"
+                            placeholder="Additional instructions or medical notes..."
+                            value={doctorNotes}
+                            onchange={handleNotesChange}>
+                        </lightning-textarea>
+
+                    </div>
+
+
+                    <!-- Save -->
+
+                    <div class="form-actions">
+
+                        <button
+                            class="save-button"
+                            type="button"
+                            onclick={handleSavePrescription}
+                            disabled={isSaving}>
+
+                            <template
+                                if:false={isSaving}>
+
+                                <span>
+                                    Create Prescription
+                                </span>
+
+                                <span>
+                                    ✓
+                                </span>
+
+                            </template>
+
+
+                            <template
+                                if:true={isSaving}>
+
+                                <span>
+                                    Creating...
+                                </span>
+
+                                <span>
+                                    ⏳
+                                </span>
+
+                            </template>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================================
+                 MY PRESCRIPTIONS
+            ========================================== -->
+
+            <section class="section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            MEDICAL RECORDS
+                        </span>
+
+                        <h2>
+                            My Prescriptions
+                        </h2>
+
+                        <p>
+                            Review medicines, dosage instructions
+                            and notes from your prescriptions.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="prescription-grid">
+
+                    <template
+                        for:each={prescriptions}
+                        for:item="prescription">
+
+                        <article
+                            class="prescription-card"
+                            key={prescription.Id}>
+
+
+                            <!-- Prescription Header -->
+
+                            <div class="prescription-header">
+
+                                <div class="prescription-icon">
+                                    💊
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        {prescription.Name}
+                                    </h3>
+
+                                    <p>
+                                        {prescription.Prescription_Date__c}
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Doctor -->
+
+                            <div class="medical-item">
+
+                                <span>
+                                    Doctor
+                                </span>
+
+                                <strong>
+
+                                    Dr.
+                                    {prescription.Appointment__r.Doctor__r.Name}
+
+                                </strong>
+
+                            </div>
+
+
+                            <!-- Medicines -->
+
+                            <div class="medical-item">
+
+                                <span>
+                                    Medicines
+                                </span>
+
+                                <p>
+                                    {prescription.Medicines__c}
+                                </p>
+
+                            </div>
+
+
+                            <!-- Dosage -->
+
+                            <div class="medical-item">
+
+                                <span>
+                                    Dosage Instructions
+                                </span>
+
+                                <p>
+                                    {prescription.Dosage_Instructions__c}
+                                </p>
+
+                            </div>
+
+
+                            <!-- Doctor Notes -->
+
+                            <div class="medical-item">
+
+                                <span>
+                                    Doctor Notes
+                                </span>
+
+                                <p>
+                                    {prescription.Doctor_Notes__c}
+                                </p>
+
+                            </div>
+
+
+                            <div class="prescription-footer">
+
+                                <span>
+                                    ✓ Prescription Record
+                                </span>
+
+                            </div>
+
+                        </article>
+
+                    </template>
+
+
+                    <!-- Empty State -->
+
+                    <template
+                        if:false={prescriptions.length}>
+
+                        <div class="empty-state">
+
+                            <div class="empty-icon">
+                                💊
+                            </div>
+
+                            <h3>
+                                No prescriptions found
+                            </h3>
+
+                            <p>
+                                Your prescriptions will
+                                appear here after they are created.
+                            </p>
+
+                        </div>
+
+                    </template>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+
+        <!-- =========================================
+             FOOTER
+        ========================================== -->
+
+        <footer class="footer">
+
+            <div>
+
+                <strong>
+                    🏥 Hospital Management System
+                </strong>
+
+                <p>
+                    Secure digital healthcare management
+                    powered by Salesforce.
+                </p>
+
+            </div>
+
+            <div class="footer-right">
+
+                © 2026 Hospital Portal
+
+            </div>
+
+        </footer>
+
+    </div>
+
+</template>

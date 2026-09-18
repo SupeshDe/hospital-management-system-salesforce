@@ -1,0 +1,1231 @@
+<template>
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="portal-header">
+
+        <div class="header-media"></div>
+        <div class="header-overlay"></div>
+
+        <div class="header-content">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    🏥
+                </div>
+
+                <div class="brand-text">
+
+                    <span class="brand-overline">
+                        DIGITAL HEALTHCARE
+                    </span>
+
+                    <h1>
+                        Hospital Management System
+                    </h1>
+
+                    <p>
+                        Patient Healthcare Portal
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="header-status">
+
+                <span class="status-dot"></span>
+
+                <span>
+                    Portal Online
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="portal-container">
+
+
+        <!-- =================================================
+             WELCOME
+             ================================================= -->
+
+        <section class="welcome-banner">
+
+            <div class="welcome-content">
+
+                <span class="welcome-label">
+                    WELCOME TO YOUR HEALTHCARE PORTAL
+                </span>
+
+                <h2>
+                    Your Health,
+                    <span>Our Priority.</span>
+                </h2>
+
+                <p>
+                    Manage appointments, connect with doctors,
+                    and access your healthcare information
+                    from one secure place.
+                </p>
+
+            </div>
+
+
+            <div class="welcome-features">
+
+                <div class="welcome-feature">
+                    <span class="feature-icon">🛡️</span>
+                    <span class="feature-label">Secure<br/>&amp; Private</span>
+                </div>
+
+                <div class="feature-divider"></div>
+
+                <div class="welcome-feature">
+                    <span class="feature-icon">👥</span>
+                    <span class="feature-label">Expert<br/>Doctors</span>
+                </div>
+
+                <div class="feature-divider"></div>
+
+                <div class="welcome-feature">
+                    <span class="feature-icon">⚡</span>
+                    <span class="feature-label">Quick<br/>Access</span>
+                </div>
+
+            </div>
+
+
+            <div class="welcome-visual">
+
+                <div class="medical-circle circle-one"></div>
+
+                <div class="medical-circle circle-two"></div>
+
+                <div class="welcome-avatar">
+                    🧑‍⚕️
+                </div>
+
+                <div class="welcome-heart">
+                    ❤️
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BOOK APPOINTMENT
+             ================================================= -->
+
+        <section class="section booking-section">
+
+            <div class="booking-decoration decoration-one"></div>
+            <div class="booking-decoration decoration-two"></div>
+
+
+            <div class="section-header booking-header">
+
+                <div class="section-header-left">
+
+                    <div class="section-icon booking-icon">
+                        📅
+                    </div>
+
+                    <div>
+
+                        <span class="section-label">
+                            APPOINTMENT
+                        </span>
+
+                        <h2>
+                            Book an Appointment
+                        </h2>
+
+                        <p>
+                            Choose a convenient date, time and
+                            appointment type before selecting your doctor.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="find-doctors-btn"
+                    type="button"
+                    onclick={handleViewAllDoctors}
+                >
+                    <span>Find Available Doctors</span>
+                    <span class="button-arrow">→</span>
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 BOOKING FORM
+                 ================================================= -->
+
+            <div class="booking-form">
+
+
+                <!-- DATE & TIME -->
+
+                <div class="form-group booking-field">
+
+                    <div class="field-title">
+
+                        <div class="field-icon">
+                            📅
+                        </div>
+
+                        <div>
+
+                            <label for="appointmentDateOnly">
+                                Appointment Date &amp; Time
+                            </label>
+
+                            <span>
+                                Select your preferred schedule
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="date-time-row">
+
+                        <input
+                            id="appointmentDateOnly"
+                            type="date"
+                            value={appointmentDateOnly}
+                            min={minAppointmentDateOnly}
+                            onchange={handleDateOnlyChange}
+                        />
+
+                        <div class="time-select-group">
+
+                            <select
+                                id="hourSelect"
+                                class="time-select hm-select"
+                                value={selectedHour}
+                                onchange={handleHourChange}
+                            >
+
+                                <template
+                                    for:each={hourOptions}
+                                    for:item="option"
+                                >
+
+                                    <option
+                                        key={option.value}
+                                        value={option.value}
+                                    >
+                                        {option.label}
+                                    </option>
+
+                                </template>
+
+                            </select>
+
+                            <span class="time-colon">
+                                :
+                            </span>
+
+                            <select
+                                id="minuteSelect"
+                                class="time-select hm-select"
+                                value={selectedMinute}
+                                onchange={handleMinuteChange}
+                            >
+
+                                <template
+                                    for:each={minuteOptions}
+                                    for:item="option"
+                                >
+
+                                    <option
+                                        key={option.value}
+                                        value={option.value}
+                                    >
+                                        {option.label}
+                                    </option>
+
+                                </template>
+
+                            </select>
+
+                            <select
+                                id="meridiemSelect"
+                                class="time-select meridiem-select"
+                                value={selectedMeridiem}
+                                onchange={handleMeridiemChange}
+                            >
+
+                                <template
+                                    for:each={meridiemOptions}
+                                    for:item="option"
+                                >
+
+                                    <option
+                                        key={option.value}
+                                        value={option.value}
+                                    >
+                                        {option.label}
+                                    </option>
+
+                                </template>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="field-hint">
+                        Choose a future date and available time.
+                    </div>
+
+                </div>
+
+
+                <!-- SELECT DOCTOR -->
+
+                <div class="form-group booking-field">
+
+                    <div class="field-title">
+
+                        <div class="field-icon">
+                            🧑‍⚕️
+                        </div>
+
+                        <div>
+
+                            <label for="selectedDoctor">
+                                Select Doctor
+                            </label>
+
+                            <span>
+                                Choose a healthcare professional
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <select
+                        id="selectedDoctor"
+                        value={selectedDoctorId}
+                        onchange={handleDoctorSelect}
+                    >
+
+                        <option value="">
+                            Search and select a doctor...
+                        </option>
+
+                        <template
+                            for:each={doctorOptions}
+                            for:item="option"
+                        >
+
+                            <option
+                                key={option.value}
+                                value={option.value}
+                            >
+                                {option.label}
+                            </option>
+
+                        </template>
+
+                    </select>
+
+
+                    <div class="field-hint">
+                        Only available doctors are shown here.
+                    </div>
+
+                </div>
+
+
+                <!-- APPOINTMENT TYPE -->
+
+                <div class="form-group booking-field">
+
+                    <div class="field-title">
+
+                        <div class="field-icon">
+                            🩺
+                        </div>
+
+                        <div>
+
+                            <label for="appointmentType">
+                                Appointment Type
+                            </label>
+
+                            <span>
+                                Select the reason for your visit
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <select
+                        id="appointmentType"
+                        value={appointmentType}
+                        onchange={handleTypeChange}
+                    >
+
+                        <template
+                            for:each={appointmentTypeOptions}
+                            for:item="option"
+                        >
+
+                            <option
+                                key={option.value}
+                                value={option.value}
+                            >
+                                {option.label}
+                            </option>
+
+                        </template>
+
+                    </select>
+
+
+                    <div class="field-hint">
+                        Emergency appointments are automatically
+                        marked High priority.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CONFIRM BOOKING
+                 ================================================= -->
+
+            <div class="booking-confirm-row">
+
+                <span class="booking-confirm-hint">
+
+                    <template if:false={canBookFromForm}>
+                        Select a date, time, doctor and appointment type to continue.
+                    </template>
+
+                    <template if:true={canBookFromForm}>
+                        Ready to confirm your appointment.
+                    </template>
+
+                </span>
+
+                <button
+                    class="confirm-book-btn"
+                    type="button"
+                    onclick={handleBookFromForm}
+                    disabled={isConfirmDisabled}
+                >
+                    <span>Book Appointment</span>
+                    <span class="button-arrow">→</span>
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 BOOKING INFORMATION
+                 ================================================= -->
+
+            <div class="booking-info-row">
+
+
+                <div class="booking-info-item">
+
+                    <span class="info-icon">
+                        🔒
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Secure
+                        </strong>
+
+                        <span>
+                            Your healthcare data is protected.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="booking-info-item">
+
+                    <span class="info-icon">
+                        ⚡
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Quick Booking
+                        </strong>
+
+                        <span>
+                            Select a doctor and confirm.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="booking-info-item">
+
+                    <span class="info-icon">
+                        ✓
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Easy Management
+                        </strong>
+
+                        <span>
+                            View and manage your appointments.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             DOCTORS
+             ================================================= -->
+
+        <section class="section doctors-section">
+
+
+            <div class="section-header">
+
+                <div class="section-header-left">
+
+                    <div class="section-icon doctor-section-icon">
+                        👨‍⚕️
+                    </div>
+
+                    <div>
+
+                        <span class="section-label">
+                            FIND A DOCTOR
+                        </span>
+
+                        <h2>
+                            Our Doctors
+                        </h2>
+
+                        <p>
+                            Search for a doctor and choose an available
+                            healthcare professional.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="view-all-link"
+                    type="button"
+                    onclick={handleViewAllDoctors}
+                >
+                    View All →
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 DOCTOR FILTERS
+                 ================================================= -->
+
+            <div class="filters">
+
+
+                <div class="search-box">
+
+                    <span class="input-icon">
+                        🔍
+                    </span>
+
+                    <input
+                        type="search"
+                        placeholder="Search doctor..."
+                        value={searchTerm}
+                        oninput={handleDoctorSearch}
+                    />
+
+                </div>
+
+
+                <div class="filter-box">
+
+                    <select
+                        value={availabilityFilter}
+                        onchange={handleAvailabilityFilter}
+                    >
+
+                        <template
+                            for:each={availabilityOptions}
+                            for:item="option"
+                        >
+
+                            <option
+                                key={option.value}
+                                value={option.value}
+                            >
+                                {option.label}
+                            </option>
+
+                        </template>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DOCTOR CARDS
+                 ================================================= -->
+
+            <div class="doctor-grid">
+
+
+                <template
+                    for:each={filteredDoctors}
+                    for:item="doctor"
+                >
+
+                    <article
+                        class="doctor-card"
+                        key={doctor.Id}
+                    >
+
+
+                        <div class="doctor-card-header">
+
+                            <div class="doctor-avatar">
+                                🧑‍⚕️
+                            </div>
+
+                            <div class="doctor-name-block">
+
+                                <h3>
+                                    {doctor.Name}
+                                </h3>
+
+                                <span class="doctor-role">
+                                    Medical Professional
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="doctor-hours">
+
+                            <span class="detail-icon">
+                                🕐
+                            </span>
+
+                            <span>
+                                {doctor.Availability__c}
+                            </span>
+
+                        </div>
+
+
+                        <div class="doctor-status">
+
+
+                            <template
+                                if:false={doctor.isUnavailable}
+                            >
+
+                                <span class="available-dot"></span>
+
+                                <span>
+                                    Available
+                                </span>
+
+                            </template>
+
+
+                            <template
+                                if:true={doctor.isUnavailable}
+                            >
+
+                                <span class="unavailable-dot"></span>
+
+                                <span>
+                                    Not Available
+                                </span>
+
+                            </template>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             BOOK BUTTON
+                             ================================================= -->
+
+                        <template
+                            if:false={doctor.isUnavailable}
+                        >
+
+                            <button
+                                class="book-btn"
+                                type="button"
+                                data-id={doctor.Id}
+                                onclick={handleBook}
+                                disabled={isBooking}
+                            >
+
+                                <span>
+                                    Book Appointment
+                                </span>
+
+                                <span class="button-arrow">
+                                    →
+                                </span>
+
+                            </button>
+
+                        </template>
+
+
+                        <template
+                            if:true={doctor.isUnavailable}
+                        >
+
+                            <button
+                                class="book-btn unavailable-btn"
+                                type="button"
+                                disabled
+                            >
+                                Currently Unavailable
+                            </button>
+
+                        </template>
+
+                    </article>
+
+                </template>
+
+
+                <!-- =================================================
+                     EMPTY DOCTOR STATE
+                     ================================================= -->
+
+                <template
+                    if:false={filteredDoctors.length}
+                >
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+                            🔍
+                        </div>
+
+                        <h3>
+                            No doctors found
+                        </h3>
+
+                        <p>
+                            Try changing your search or availability filter.
+                        </p>
+
+                    </div>
+
+                </template>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             APPOINTMENT HISTORY
+             ================================================= -->
+
+        <section class="section appointment-section">
+
+
+            <div class="section-header">
+
+                <div class="section-header-left">
+
+                    <div class="section-icon">
+                        📋
+                    </div>
+
+                    <div>
+
+                        <span class="section-label">
+                            MY HEALTHCARE
+                        </span>
+
+                        <h2>
+                            Appointment History
+                        </h2>
+
+                        <p>
+                            View and manage your upcoming and previous appointments.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="view-all-link"
+                    type="button"
+                    onclick={handleViewAllAppointments}
+                >
+                    View All →
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 APPOINTMENT FILTERS
+                 ================================================= -->
+
+            <div class="filters">
+
+
+                <div class="search-box">
+
+                    <span class="input-icon">
+                        🔍
+                    </span>
+
+                    <input
+                        type="search"
+                        placeholder="Search by doctor..."
+                        value={appointmentSearchTerm}
+                        oninput={handleAppointmentSearch}
+                    />
+
+                </div>
+
+
+                <div class="filter-box">
+
+                    <select
+                        value={appointmentTypeFilter}
+                        onchange={handleAppointmentTypeFilter}
+                    >
+
+                        <template
+                            for:each={appointmentTypeFilterOptions}
+                            for:item="option"
+                        >
+
+                            <option
+                                key={option.value}
+                                value={option.value}
+                            >
+                                {option.label}
+                            </option>
+
+                        </template>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 APPOINTMENT LIST
+                 ================================================= -->
+
+            <div class="appointment-list">
+
+
+                <template
+                    for:each={filteredAppointments}
+                    for:item="appointment"
+                >
+
+                    <article
+                        class="appointment-card"
+                        key={appointment.Id}
+                    >
+
+
+                        <div class="appointment-date-box">
+
+                            <span class="date-day">
+                                {appointment.dayNumber}
+                            </span>
+
+                            <span class="date-month">
+                                {appointment.monthLabel}
+                            </span>
+
+                        </div>
+
+
+                        <div class="appointment-info">
+
+                            <span class="appointment-label">
+                                APPOINTMENT
+                            </span>
+
+
+                            <h3>
+                                {appointment.doctorName}
+                            </h3>
+
+
+                            <div class="appointment-details">
+
+                                <span>
+                                    🕐 {appointment.timeLabel}
+                                </span>
+
+                                <span>
+                                    🩺 {appointment.Type__c}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="appointment-status-area">
+
+
+                            <span class={appointment.statusClass}>
+                                {appointment.Status__c}
+                            </span>
+
+
+                            <div class="appointment-actions">
+
+
+                                <template
+                                    if:true={appointment.canCancel}
+                                >
+
+                                    <button
+                                        class="cancel-btn"
+                                        type="button"
+                                        data-id={appointment.Id}
+                                        onclick={handleCancelAppointment}
+                                        disabled={isCancelling}
+                                    >
+                                        Cancel
+                                    </button>
+
+                                </template>
+
+
+                                <template
+                                    if:true={appointment.isCancelled}
+                                >
+
+                                    <span class="cancelled-label">
+                                        Cancelled
+                                    </span>
+
+                                </template>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </template>
+
+
+                <!-- =================================================
+                     EMPTY APPOINTMENT STATE
+                     ================================================= -->
+
+                <template
+                    if:false={filteredAppointments.length}
+                >
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+                            📅
+                        </div>
+
+                        <h3>
+                            No appointments found
+                        </h3>
+
+                        <p>
+                            Your appointment history will appear here.
+                        </p>
+
+                    </div>
+
+                </template>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             QUICK ACCESS
+             ================================================= -->
+
+        <section class="section quick-access-section">
+
+
+            <div class="section-header">
+
+                <div class="section-header-left">
+
+                    <div class="section-icon">
+                        ⚡
+                    </div>
+
+                    <div>
+
+                        <span class="section-label">
+                            QUICK ACCESS
+                        </span>
+
+                        <h2>
+                            Healthcare Services
+                        </h2>
+
+                        <p>
+                            Quickly access your most important healthcare information.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-list">
+
+
+                <!-- PRESCRIPTIONS -->
+
+                <button
+                    class="quick-card"
+                    type="button"
+                    onclick={handlePrescriptionNavigation}
+                >
+
+                    <span class="quick-icon prescription-icon">
+                        💊
+                    </span>
+
+
+                    <span class="quick-card-content">
+
+                        <strong>
+                            Prescriptions
+                        </strong>
+
+                        <small>
+                            View your medicines and prescriptions
+                        </small>
+
+                    </span>
+
+
+                    <span class="quick-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- APPOINTMENTS -->
+
+                <button
+                    class="quick-card"
+                    type="button"
+                    onclick={handleViewAllAppointments}
+                >
+
+                    <span class="quick-icon appointment-icon">
+                        📅
+                    </span>
+
+
+                    <span class="quick-card-content">
+
+                        <strong>
+                            Appointments
+                        </strong>
+
+                        <small>
+                            View and manage your appointments
+                        </small>
+
+                    </span>
+
+
+                    <span class="quick-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- DOCTORS -->
+
+                <button
+                    class="quick-card"
+                    type="button"
+                    onclick={handleViewAllDoctors}
+                >
+
+                    <span class="quick-icon doctor-icon">
+                        👥
+                    </span>
+
+
+                    <span class="quick-card-content">
+
+                        <strong>
+                            Doctors
+                        </strong>
+
+                        <small>
+                            Find available healthcare professionals
+                        </small>
+
+                    </span>
+
+
+                    <span class="quick-arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NOTE
+
+             prescriptionManager IS NOT placed here.
+             It remains a separate component in Experience Builder.
+             ================================================= -->
+
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="portal-footer">
+
+
+        <div class="footer-content">
+
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    🏥
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Hospital Management System
+                    </h3>
+
+                    <p>
+                        Digital healthcare management platform.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-security">
+
+                <span>
+                    🔒
+                </span>
+
+                <span>
+                    Secure Healthcare Portal
+                </span>
+
+            </div>
+
+
+            <div class="footer-copy">
+
+                <p>
+                    © 2026 Hospital Management System
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</template>

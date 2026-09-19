@@ -91,3 +91,36 @@ The main objectives of this project are:
                     │ Appointment              │
                     │ Prescription             │
                     └──────────────────────────┘
+
+
+
+
+---
+
+## 🖥️ Application Screenshots
+
+### 🏥 Patient Healthcare Portal
+
+![Patient Healthcare Portal](Screenshots/portal-home.png)
+
+### 📅 Appointment Booking
+
+![Appointment Booking](Screenshots/appointment-booking.png)
+
+### 👨‍⚕️ Doctor List
+
+![Doctor List](Screenshots/doctorlist.png)
+
+### 📋 Appointment History
+
+![Appointment History](Screenshots/Appointmenthistory.png)
+
+### 💊 Prescription Management
+
+![Prescription Management](Screenshots/manageprescription.png)
+
+### 🏥 Medical Records
+
+![Medical Records](Screenshots/medicalrecords.png)
+
+---
